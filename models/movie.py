@@ -2,11 +2,11 @@
 """This module contains the class models for the movie collection API."""
 
 from datetime import datetime
-from sqlalchelmy.orm import relationship
+from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String, Date, Float, Text, ForeignKey
 
 class Movie(db.Models):
-    """Contains the class Movie."""
+    """Contains the class Movie which represents a movie."""
     __tablename__ = 'movies'
 
     id = db.Column(db.Integer, primary_key=True)

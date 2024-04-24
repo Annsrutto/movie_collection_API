@@ -2,9 +2,8 @@
 """This module contains the class models for the movie collection API."""
 
 from datetime import datetime
-from sqlalchelmy.orm import relationship
+from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String
-from models import db
 
 
 class Genre(db.Model):
