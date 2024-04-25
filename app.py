@@ -17,4 +17,11 @@ def get_all_movies():
 
 @app.route('/movies', methods=['POST'])
 def add_movies():
-    
+    try:
+        data = request.json
+        title = data.get('title')
+        release_date = data.get('release_date', None)
+        director_id = data.get('director_id', None)
+        genre = data.get('genre', None)
+        
+
