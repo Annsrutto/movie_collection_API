@@ -23,5 +23,24 @@ def add_movies():
         release_date = data.get('release_date', None)
         director_id = data.get('director_id', None)
         genre = data.get('genre', None)
-        
 
+        if not title or not release_date or not director_id or not genre:
+            return jsonify('error': 'Title, release_date, director_id and genre required')
+
+        new_movie = Movie(title=title, release_date=release_date, director_id=director_id, genre=genre)
+        
+        new_movie.save()
+
+        response_data = {
+            'message' : 'movie added successfully'
+            'movie' : new_movie.serialize()
+        }
+        return jsonify(response_data), 201
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+
+if '__name__' == '__main__':
+    app.run(debug=True)
+    
