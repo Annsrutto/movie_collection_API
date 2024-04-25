@@ -3,8 +3,8 @@
 
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from sqlalchemy.orm import relationship
-from sqlalchemy import Column, Integer, String, Date, Float, Text, ForeignKey
+from sqlalchemy.orm import relationship, validates
+from sqlalchemy import Column, Integer, String, Date, Float, ForeignKey
 
 db = SQLAlchemy()
 
@@ -16,12 +16,51 @@ class Movie(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     release_date = db.Column(db.Date)
-    rating = db.Column(db.Float)
-    duration_minutes = db.Column(db.Integer)
-    overview = db.Column(db.Text)
     director_id = db.Column(db.Integer, db.ForeignKey('directors.id'))
-    genre_id = db.Column(db.Integer, db.ForeignKey('genres.id'))
     
+    director = relationship("Director", back_populates="movies")
+    
+
+    def __init__(self, title, release_date=None, director=None):
+        self.id = None
+        self.title = title
+        self.release_date = release_date
+        self.director_id = director_id
+        self.genre_id = genre_id
+
+    def set_id(self, id):
+        self.id = id
+
+    def save(self):
+        try:
+            db.session.add(self)
+            db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+            raise e
+    
+    def serialize(self):
+        return {
+            'id' : self.id,
+            'title' : self.title,
+            'release_date' : str(self.release_date),
+            'director_id' : self.director_id
+            'genre_id' : self.genre_id
+        }
+
+    @validates('title')
+    def validate_title(self, key, title):
+        if not title:
+            raise ValueError("Title is required")
+        return title
+
+    @validates('release_date')
+    def validate_release_date(self, key, release_date):
+        try:
+            datetime.strptime(release_date, '%Y-%m-%d')
+        except ValueError:
+            raise ValueError("Invalid format")
+        return release_date
 
     def __repr__(self):
         return f"<Movie(id={self.id}, title='{self.title}')>"
