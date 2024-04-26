@@ -39,13 +39,13 @@ class Movie(db.Model):
             db.session.rollback()
             raise e
     
-    def serialize(self):
+    def serialize_movie(self):
         return {
             'id' : self.id,
             'title' : self.title,
             'release_date' : str(self.release_date),
-            'director_id' : self.director_id
-            'genre_id' : self.genre_id
+            'director_id' : self.director_id,
+            'genre' : self.genre
         }
 
     @validates('title')
