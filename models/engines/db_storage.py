@@ -19,3 +19,15 @@ class DatabaseHandler:
         session.rollback()
         raise e
     
+    def search_movies(self, title=None, release_date=None, director=None, genre=None):
+        query =  session.query(Movie)
+        if title:
+            query = query.filter(Movie.title.ilike(f'%{title}%'))
+        if director:
+            query = query.filter(Movie.director.ilike(f'%{director}%'))
+        if genre:
+            query = query.filter(Movie.genre.ilike(f'%{genre}%'))
+        if release_date:
+            query = query.filter(Movie.release_date == release_date)
+        return query.all()
+            
