@@ -18,6 +18,7 @@ def get_all_movies():
     movie_list = [serialize_movie(movie) for movie in movies]
     return jsonify(movie_list)
 
+
 @app.route('/movies', methods=['POST'])
 def add_movies():
     try:
@@ -28,21 +29,22 @@ def add_movies():
         genre = data.get('genre', None)
 
         if not title or not release_date or not director_id or not genre:
-            return jsonify({'error' : 'Title, release_date, director_id and genre required'})
+            return jsonify({'error': 'Title, release_date, director_id and genre required'})
 
         new_movie = Movie(title=title, release_date=release_date, director_id=director_id, genre=genre)
-        
+
         new_movie.save()
 
         response_data = {
-            'message' : 'movie added successfully',
-            'movie' : new_movie.serialize()
+            'message': 'movie added successfully',
+            'movie': new_movie.serialize()
         }
         return jsonify(response_data), 201
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
+
+
 @app.route('/search', methods=['GET'])
 def search_movies():
     title = request.args.get('title')
@@ -59,14 +61,14 @@ def search_movies():
         query = query.filter(Movie.genre.ilike(f'%{genre}%'))
     if release_date:
         query = query.filter(Movie.release_date == release_date)
-    
+
     movies = query.all()
 
     if movies:
         movie_list = [serialize_movie(movie) for movie in movies]
         return jsonify({'movie': movie_list}), 200
     else:
-        return jsonify({'message':'No movie found matching search criteria'}), 200
+        return jsonify({'message': 'No movie found matching search criteria'}), 200
 
 # PUT /movies/<id> endpoint to update movie details
 @app.route('/movies/<int:movie_id>', methods=['PUT'])
@@ -76,7 +78,7 @@ def update_movie(movie_id):
         if not data:
             return jsonify({'error': 'Invalid JSON'}), 400
 
-        if 'title' or 'director' or 'genre' or 'release_date' not in data
+        if 'title' or 'director' or 'genre' or 'release_date' not in data:
             return jsonify({'error': 'Missing required data'}), 400
 
         movie = movie_dal.get_movie_by_id(movie_id)
@@ -87,17 +89,32 @@ def update_movie(movie_id):
         movie.director = data['director']
         movie.genre = data['genre']
         movie.release_date = data['release_date']
- 
+
         movie_dal.update_movie(movie)
-  
+
         response = make_response(jsonify({'message': 'Movie updated successfully'}), 200)
         response.headers['Content-Type'] = 'application/json'
         response.headers['Location'] = f'/movies/{movie_id}'
         return response
-    
+
     except DatabaseError:
         return jsonify({'error': 'Database error occurred'}), 500
 
+# Not sure
+@app.errorhandler(400)
+def bad_request(error):
+    return jsonify({'error': 'Bad request'}), 400
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return jsonify({'error': 'Not found'}), 404
+
+
+@app.errorhandler(500)
+def internal_server_error(error):
+    return jsonify({'error': 'Internal server error'}), 500
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
-    
