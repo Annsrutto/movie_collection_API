@@ -28,8 +28,9 @@ def add_movies():
         director_id = data.get('director_id', None)
         genre = data.get('genre', None)
 
-        if not title or not release_date or not director_id or not genre:
-            return jsonify({'error': 'Title, release_date, director_id and genre required'})
+        required_fields = ['title', 'director', 'genre', 'release_date']
+        if not all(field in data for field in required_fields):
+            return jsonify({'error': 'Missing data required'}), 400
 
         new_movie = Movie(title=title, release_date=release_date, director_id=director_id, genre=genre)
 
@@ -80,7 +81,7 @@ def update_movie(movie_id):
 
         required_fields = ['title', 'director', 'genre', 'release_date']
         if not all(field in data for field in required_fields):
-            return jsonify({'error': 'Missing required data'}), 400
+            return jsonify({'error': 'Missing data required'}), 400
 
         movie = Movie.query.get(movie_id)
         if not movie:
