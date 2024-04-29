@@ -9,7 +9,6 @@ from movie_dal import MovieDAL, DatabaseError
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
 
-movie_dal = MovieDAL()  # Initialize the DAL for database interaction
 
 # the endpoint url and method for adding movies
 @app.route('/movies', methods=['GET'])
@@ -78,10 +77,11 @@ def update_movie(movie_id):
         if not data:
             return jsonify({'error': 'Invalid JSON'}), 400
 
-        if 'title' or 'director' or 'genre' or 'release_date' not in data:
+        required_fields = ['title', 'director', 'genre', 'release_date']
+        if not all(field in data for field in required_fields):
             return jsonify({'error': 'Missing required data'}), 400
 
-        movie = movie_dal.get_movie_by_id(movie_id)
+        movie = Movie.query.get(movie_id)
         if not movie:
             return jsonify({'error': 'Movie not found'}), 404
 
@@ -90,7 +90,7 @@ def update_movie(movie_id):
         movie.genre = data['genre']
         movie.release_date = data['release_date']
 
-        movie_dal.update_movie(movie)
+        db.session.commit()
 
         response = make_response(jsonify({'message': 'Movie updated successfully'}), 200)
         response.headers['Content-Type'] = 'application/json'
