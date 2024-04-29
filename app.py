@@ -100,21 +100,6 @@ def update_movie(movie_id):
     except DatabaseError:
         return jsonify({'error': 'Database error occurred'}), 500
 
-# Not sure
-@app.errorhandler(400)
-def bad_request(error):
-    return jsonify({'error': 'Bad request'}), 400
-
-
-@app.errorhandler(404)
-def not_found(error):
-    return jsonify({'error': 'Not found'}), 404
-
-
-@app.errorhandler(500)
-def internal_server_error(error):
-    return jsonify({'error': 'Internal server error'}), 500
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
