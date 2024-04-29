@@ -3,8 +3,9 @@
 
 from flask import Flask, request, jsonify, make_response
 from config import SQLALCHEMY_DATABASE_URI
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.exc import DatabaseError
 from models import movie, director, genre
-from movie_dal import MovieDAL, DatabaseError
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
