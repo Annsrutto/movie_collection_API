@@ -31,7 +31,10 @@ class DatabaseHandler:
             query = query.filter(Movie.release_date == release_date)
         return query.all()
 
- 
     def update_movies(self, movie):
         session.merge(movie)
+        session.commit()
+
+    def delete_movies(self, movie):
+        session.delete(movie)
         session.commit()

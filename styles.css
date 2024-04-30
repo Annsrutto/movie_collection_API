@@ -1,0 +1,31 @@
+/* Style Movie Container */
+#movieContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Style Movie Card */
+.movie {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    width: 300px;
+}
+
+/* Style Form Inputs */
+input[type="text"],
+input[type="date"],
+button {
+    margin-bottom: 10px;
+    display: block;
+}
+
+button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

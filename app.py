@@ -8,8 +8,8 @@ from sqlalchemy.exc import DatabaseError
 from models import movie, director, genre
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
-
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///movie_database.db'
+db = SQLAlchemy(app)
 
 # the endpoint url and method for adding movies
 @app.route('/movies', methods=['GET'])
@@ -102,6 +102,21 @@ def update_movie(movie_id):
     except DatabaseError:
         return jsonify({'error': 'Database error occurred'}), 500
 
+@app.route('/movies/<int:id>', methods=['DELETE'])
+def delete_movie(id):
+    # Check if the movie with the provided ID exists
+    movie = Movie.query.get(id)
+    if not movie:
+        return jsonify({'message': 'Movie not found'}), 404
+
+    try:
+        # Soft delete the movie by marking it as deleted
+        movie.deleted = True
+        db.session.commit()
+        return jsonify({'message': 'Movie deleted successfully'}), 204
+    except Exception as e:
+        # Handle database errors
+        return jsonify({'message': 'Failed to delete movie', 'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
