@@ -3,84 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Collection</title>
-    <style>
-        /* Style for movie display */
-        .movie {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    <title>My Movie Collection</title>
 </head>
 <body>
-    <!-- Add Movie Form -->
-    <form action="/movies" method="POST">
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required><br>
-        <label for="director">Director:</label>
-        <input type="text" id="director" name="director" required><br>
-        <label for="releaseDate">Release Date:</label>
-        <input type="date" id="releaseDate" name="releaseDate" required><br>
-        <button type="submit">Add Movie</button>
-    </form>
+    <header>
+        <h1>My Movie Collection</h1>
+        <form id="form">
+            <input type="text" placeholder="Search" id="search" class="search">
+        </form>
+        <button id="addMovieBtn">Add Movie</button>
+        <div id="messageContainer"></div>
+    </header>
 
-    <!-- Search Movie Form -->
-    <form action="/search" method="GET">
-        <label for="query">Search:</label>
-        <input type="text" id="query" name="query">
-        <button type="submit">Search</button>
-    </form>
-
-    <div id="movieContainer">
-        <!-- Example Movie Display -->
+    <main id="main">
         <div class="movie">
-            <h2>Title</h2>
-            <p>Director: Director Name</p>
-            <p>Release Date: 2023-01-01</p>
+            <img src="https://images.unsplash.com/photo-1713810309146-8fcfa17d700c?q=80&w=2068&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="image">
+
+            <div class="movie-info">
+                <h3>Movie Title</h3>
+                <span class="green">9.8</span>
+            </div>
+            <div class="overview">
+                <h3>Overview</h3>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus ad tempore assumenda id temporibus pariatur rem culpa reprehenderit, aperiam eum?
+            </div>
+        </div>
+
+        <div class="movie">
+            <img src="https://images.unsplash.com/photo-1713810309146-8fcfa17d700c?q=80&w=2068&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="image">
+
+            <div class="movie-info">
+                <h3>Movie Title</h3>
+                <span class="green">9.8</span>
+            </div>
+            <div class="overview">
+                <h3>Overview</h3>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus ad tempore assumenda id temporibus pariatur rem culpa reprehenderit, aperiam eum?
+            </div>
+        </div>
+
+        <div class="movie">
+            <img src="https://images.unsplash.com/photo-1713810309146-8fcfa17d700c?q=80&w=2068&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="image">
+
+            <div class="movie-info">
+                <h3>Movie Title</h3>
+                <span class="green">9.8</span>
+            </div>
+            <div class="overview">
+                <h3>Overview</h3>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus ad tempore assumenda id temporibus pariatur rem culpa reprehenderit, aperiam eum?
+            </div>
+        </div>
+    </main>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add New Movie</h2>
+            <form id="addMovieForm">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required><br>
+                <label for="director">Director:</label>
+                <input type="text" id="director" name="director" required><br>
+                <label for="releaseDate">Release Date:</label>
+                <input type="date" id="releaseDate" name="releaseDate" required><br>
+                <label for="genre_id">Genre:</label>
+                <input type="number" id="genre_id" name="genre_id" required><br>
+                <label for="overview">Overview:</label>
+                <textarea id="overview" name="overview" required></textarea><br>
+                <label for="rating">Rating:</label>
+                <input type="number" id="rating" name="rating" min="0" max="10" step="0.1" required><br>
+                <button type="submit">Add Movie</button>
+            </form>
         </div>
     </div>
 
-    <!-- JavaScript for dynamic interactions -->
-    <script>
-        // Example JavaScript code for dynamic interactions (e.g., fetching and displaying movies)
-        // This code will interact with your Flask API endpoints
-        // You can replace this with actual AJAX requests and response handling
-
-        // Fetch and display movies
-        function fetchAndDisplayMovies() {
-            // Example data (replace with actual API response handling)
-            const movies = [
-                { title: 'Movie 1', director: 'Director 1', releaseDate: '2023-01-01' },
-                { title: 'Movie 2', director: 'Director 2', releaseDate: '2023-02-01' }
-            ];
-
-            const movieContainer = document.getElementById('movieContainer');
-            movieContainer.innerHTML = ''; // Clear existing movies
-
-            movies.forEach(movie => {
-                const movieDiv = document.createElement('div');
-                movieDiv.classList.add('movie');
-
-                const titleHeading = document.createElement('h2');
-                titleHeading.textContent = movie.title;
-
-                const directorPara = document.createElement('p');
-                directorPara.textContent = `Director: ${movie.director}`;
-
-                const releaseDatePara = document.createElement('p');
-                releaseDatePara.textContent = `Release Date: ${movie.releaseDate}`;
-
-                movieDiv.appendChild(titleHeading);
-                movieDiv.appendChild(directorPara);
-                movieDiv.appendChild(releaseDatePara);
-
-                movieContainer.appendChild(movieDiv);
-            });
-        }
-
-        // Example: Call fetchAndDisplayMovies on page load
-        window.onload = fetchAndDisplayMovies;
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
