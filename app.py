@@ -2,14 +2,20 @@
 """this contains configuration for connecting to MySQL Database."""
 
 from flask import Flask, request, jsonify, make_response
-from config import SQLALCHEMY_DATABASE_URI
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import DatabaseError
-from models import movie, director, genre
+from models.movie import Movie
+from models.director import Director
+from models.genre import Genre
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///movie_database.db'
 db = SQLAlchemy(app)
+
+# Create database tables
+with app.app_context():
+    db.create_all()
+
 
 # the endpoint url and method for adding movies
 @app.route('/movies', methods=['GET'])
@@ -17,6 +23,11 @@ def get_all_movies():
     movies = Movie.query.all()
     movie_list = [serialize_movie(movie) for movie in movies]
     return jsonify(movie_list)
+
+
+@app.route('/')
+def index():
+    return 'Welcome to the Movie Collection API!'
 
 
 @app.route('/movies', methods=['POST'])
@@ -102,6 +113,7 @@ def update_movie(movie_id):
     except DatabaseError:
         return jsonify({'error': 'Database error occurred'}), 500
 
+
 @app.route('/movies/<int:id>', methods=['DELETE'])
 def delete_movie(id):
     # Check if the movie with the provided ID exists
@@ -118,5 +130,22 @@ def delete_movie(id):
         # Handle database errors
         return jsonify({'message': 'Failed to delete movie', 'error': str(e)}), 500
 
+
+@app.errorhandler(400)
+def bad_request(error):
+    return jsonify({'error': 'Bad request'}), 400
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return jsonify({'error': 'Not found'}), 404
+
+
+@app.errorhandler(500)
+def internal_server_error(error):
+    return jsonify({'error': 'Internal server error'}), 500
+
+
 if __name__ == '__main__':
+    app.debug = True
     app.run(host='0.0.0.0', port=5000)

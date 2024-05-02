@@ -4,23 +4,24 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
+from models import Movie
 
+# Create SQLite engine and session
 engine = create_engine('sqlite:///movies.db')
-
 Session = sessionmaker(bind=engine)
 session = Session()
 
 class DatabaseHandler:
-    def add_movies(self, movie)
-    try:
-        session.add(movie)
-        session.commit()
-    except SQLAlchemyError as e:
-        session.rollback()
-        raise e
+    def add_movie(self, movie):
+        try:
+            session.add(movie)
+            session.commit()
+        except SQLAlchemyError as e:
+            session.rollback()
+            raise e
     
-    def search_movies(self, title=None, release_date=None, director=None, genre=None):
-        query =  session.query(Movie)
+    def search_movie(self, title=None, release_date=None, director=None, genre=None):
+        query = session.query(Movie)
         if title:
             query = query.filter(Movie.title.ilike(f'%{title}%'))
         if director:
@@ -31,10 +32,10 @@ class DatabaseHandler:
             query = query.filter(Movie.release_date == release_date)
         return query.all()
 
-    def update_movies(self, movie):
+    def update_movie(self, movie):
         session.merge(movie)
         session.commit()
 
-    def delete_movies(self, movie):
+    def delete_movie(self, movie):
         session.delete(movie)
         session.commit()
