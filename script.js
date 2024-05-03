@@ -1,5 +1,6 @@
 // Example JavaScript code for dynamic interactions ( fetching and displaying movies)
 // This code interacts with Flask API endpoints
+const movieURL = 'http://localhost:5000/movies'; //added movie API url
 const API_KEY = 'api_key=928a86fa32cd492578b2921001b702a1';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_URL = BASE_URL + '/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&'+API_KEY;
@@ -71,8 +72,8 @@ form.addEventListener('submit', (e) => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    const searchForm = document.getElementById('form');
-    const searchInput = document.getElementById('search');
+    //const searchForm = document.getElementById('form');
+    //const searchInput = document.getElementById('search');
     const addMovieBtn = document.getElementById('addMovieBtn');
     const modal = document.getElementById('modal');
     const closeModalBtn = document.querySelector('.close');
