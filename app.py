@@ -4,13 +4,15 @@
 from flask import Flask, request, jsonify, make_response, render_template
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import DatabaseError
-from models.movie import Movie
-from models.director import Director
+from models.movie import Movie, db
 from models.genre import Genre
 
 app = Flask(__name__)
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///movie_database.db'
-db = SQLAlchemy(app)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db.init_app(app)
 
 # Create database tables
 with app.app_context():
@@ -28,21 +30,7 @@ def get_all_movies():
 @app.route('/')
 def index():
     # Assuming you have some movies data to pass to the template
-    movies = [
-        {
-            'title': 'Movie 1',
-            'rating': 9.8,
-            'overview': 'Overview for Movie 1',
-            'image_url': 'https://images.unsplash.com/photo-1713810309146-8fcfa17d700c?q=80&w=2068&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-        },
-        {
-            'title': 'Movie 2',
-            'rating': 9.5,
-            'overview': 'Overview for Movie 2',
-            'image_url': 'https://images.unsplash.com/photo-1713810309146-8fcfa17d700c?q=80&w=2068&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-        },
-        # Add more movie data as needed
-    ]
+    movies = Movie.query.all()
     return render_template('index.html', movies=movies)
 
 
@@ -53,14 +41,14 @@ def add_movies():
         data = request.json
         title = data.get('title')
         release_date = data.get('release_date', None)
-        director_id = data.get('director_id', None)
+        # director = data.get('director', None)
         genre = data.get('genre', None)
 
-        required_fields = ['title', 'director', 'genre', 'release_date']
+        required_fields = ['title', 'genre', 'release_date']
         if not all(field in data for field in required_fields):
             return jsonify({'error': 'Missing data required'}), 400
 
-        new_movie = Movie(title=title, release_date=release_date, director_id=director_id, genre=genre)
+        new_movie = Movie(title=title, release_date=release_date, genre=genre)
 
         new_movie.save()
 
@@ -78,14 +66,14 @@ def add_movies():
 def search_movies():
     title = request.args.get('title')
     release_date = request.args.get('release_date')
-    director = request.args.get('director')
+    # director = request.args.get('director')
     genre = request.args.get('genre')
 
     query = Movie.query
     if title:
         query = query.filter(Movie.title.ilike(f'%{title}%'))
-    if director:
-        query = query.filter(Movie.director.ilike(f'%{director}%'))
+    # if director:
+        # query = query.filter(Movie.director.ilike(f'%{director}%'))
     if genre:
         query = query.filter(Movie.genre.ilike(f'%{genre}%'))
     if release_date:
@@ -107,7 +95,7 @@ def update_movie(movie_id):
         if not data:
             return jsonify({'error': 'Invalid JSON'}), 400
 
-        required_fields = ['title', 'director', 'genre', 'release_date']
+        required_fields = ['title', 'genre', 'release_date']
         if not all(field in data for field in required_fields):
             return jsonify({'error': 'Missing data required'}), 400
 
@@ -116,7 +104,7 @@ def update_movie(movie_id):
             return jsonify({'error': 'Movie not found'}), 404
 
         movie.title = data['title']
-        movie.director = data['director']
+        # movie.director = data['director']
         movie.genre = data['genre']
         movie.release_date = data['release_date']
 

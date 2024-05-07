@@ -16,16 +16,16 @@ class Movie(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     release_date = db.Column(db.Date)
-    director_id = db.Column(db.Integer, db.ForeignKey('directors.id'))
+    # director_id = db.Column(db.Integer, db.ForeignKey('directors.id'))
     
-    director = relationship("Director", back_populates="movies")
+    # director = relationship("Director", back_populates="movies")
     
 
-    def __init__(self, title, release_date=None, director=None):
+    def __init__(self, title, release_date=None):
         self.id = None
         self.title = title
         self.release_date = release_date
-        self.director_id = director_id
+        # self.director = director
         self.genre_id = genre_id
 
     def set_id(self, id):
@@ -44,7 +44,7 @@ class Movie(db.Model):
             'id' : self.id,
             'title' : self.title,
             'release_date' : str(self.release_date),
-            'director_id' : self.director_id,
+           # 'director': self.director.serialize() if self.director else None,
             'genre' : self.genre
         }
 
