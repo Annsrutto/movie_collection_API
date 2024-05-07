@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """this contains configuration for connecting to MySQL Database."""
 
-from flask import Flask, request, jsonify, make_response
+from flask import Flask, request, jsonify, make_response, render_template
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import DatabaseError
 from models.movie import Movie
@@ -27,7 +27,24 @@ def get_all_movies():
 
 @app.route('/')
 def index():
-    return 'Welcome to the Movie Collection API!'
+    # Assuming you have some movies data to pass to the template
+    movies = [
+        {
+            'title': 'Movie 1',
+            'rating': 9.8,
+            'overview': 'Overview for Movie 1',
+            'image_url': 'https://images.unsplash.com/photo-1713810309146-8fcfa17d700c?q=80&w=2068&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+        },
+        {
+            'title': 'Movie 2',
+            'rating': 9.5,
+            'overview': 'Overview for Movie 2',
+            'image_url': 'https://images.unsplash.com/photo-1713810309146-8fcfa17d700c?q=80&w=2068&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+        },
+        # Add more movie data as needed
+    ]
+    return render_template('index.html', movies=movies)
+
 
 
 @app.route('/movies', methods=['POST'])
