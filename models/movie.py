@@ -24,9 +24,9 @@ class Movie(db.Model):
     def __init__(self, title, release_date=None):
         self.id = None
         self.title = title
-        self.release_date = release_date
+        # self.release_date = release_date
         # self.director = director
-        self.genre_id = genre_id
+        # self.genre_id = genre_id
 
     def set_id(self, id):
         self.id = id
@@ -39,13 +39,13 @@ class Movie(db.Model):
             db.session.rollback()
             raise e
     
-    def serialize_movie(self):
+    def serialize(self):
         return {
             'id' : self.id,
             'title' : self.title,
-            'release_date' : str(self.release_date),
+            # 'release_date' : str(self.release_date),
            # 'director': self.director.serialize() if self.director else None,
-            'genre' : self.genre
+            # 'genre' : self.genre
         }
 
     @validates('title')
