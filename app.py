@@ -23,8 +23,8 @@ with app.app_context():
 @app.route('/movies', methods=['GET'])
 def get_all_movies():
     movies = Movie.query.all()
-    movie_list = [serialize(movie) for movie in movies]
-    return jsonify(movie_list)
+    movie_list = [movie.serialize() for movie in movies]
+    return (movie_list)
 
 
 @app.route('/')
@@ -82,7 +82,7 @@ def search_movies():
     movies = query.all()
 
     if movies:
-        movie_list = [serialize(movie) for movie in movies]
+        movie_list = [movie.serialize() for movie in movies]
         return jsonify({'movie': movie_list}), 200
     else:
         return jsonify({'message': 'No movie found matching search criteria'}), 200
@@ -95,7 +95,7 @@ def update_movie(movie_id):
         if not data:
             return jsonify({'error': 'Invalid JSON'}), 400
 
-        required_fields = ['title', 'genre', 'release_date']
+        required_fields = ['title']
         if not all(field in data for field in required_fields):
             return jsonify({'error': 'Missing data required'}), 400
 
@@ -105,8 +105,8 @@ def update_movie(movie_id):
 
         movie.title = data['title']
         # movie.director = data['director']
-        movie.genre = data['genre']
-        movie.release_date = data['release_date']
+        # movie.genre = data['genre']
+        # movie.release_date = data['release_date']
 
         db.session.commit()
 

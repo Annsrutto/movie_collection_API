@@ -39,10 +39,10 @@ class Movie(db.Model):
             db.session.rollback()
             raise e
     
-    def serialize(self):
+    def serialize(movie):
         return {
-            'id' : self.id,
-            'title' : self.title,
+            'id' : movie.id,
+            'title' : movie.title,
             # 'release_date' : str(self.release_date),
            # 'director': self.director.serialize() if self.director else None,
             # 'genre' : self.genre
