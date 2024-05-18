@@ -64,8 +64,8 @@ Welcome to the Movie Collection API! This project empowers developers with a use
 
 ## Screenshots
 
-![App Screenshot]()
 
+<img width="830" alt="App screenshot" src="https://github.com/Annsrutto/movie_collection_API/assets/135266679/393ca09d-67ff-489b-a724-f307aa444d91">
 
 ## Usage/Examples
 
