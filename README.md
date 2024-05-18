@@ -4,6 +4,12 @@
 Welcome to the Movie Collection API! This project empowers developers with a user-friendly and powerful way to access a vast amount of movie data. Whether you're building applications, websites, or simply have a passion for movies, this API provides a comprehensive resource to enrich your projects.
 
 
+## Features
+
+- Rich Movie Data: Access details like titles, descriptions, cast, crew, genres, release dates, and more.
+- Efficient Search: Find movies quickly and easily using various filters and keywords.
+- User-Friendly API Design: The RESTful API is well-documented and straightforward to integrate.
+- Regular Updates: We strive to keep the data current and maintain a reliable API.
 
 
 ## API Reference
@@ -56,46 +62,13 @@ Welcome to the Movie Collection API! This project empowers developers with a use
 - [@daviskoech](https://www.github.com/davykoch)
 
 
-
-
-## Contributing
-
-We welcome contributions to this project! If you have improvements, bug fixes, or feature suggestions, feel free to create a pull request on this repository. Please follow these guidelines:
-
-- Fork the repository.
-- Create a new branch for your changes.
-- Write clear and concise commit messages.
-- Add unit tests for your contributions.
-- Submit a pull request for review.
-
-
-## Features
-
-- Rich Movie Data: Access details like titles, descriptions, cast, crew, genres, release dates, and more.
-- Efficient Search: Find movies quickly and easily using various filters and keywords.
-- User-Friendly API Design: The RESTful API is well-documented and straightforward to integrate.
-- Regular Updates: We strive to keep the data current and maintain a reliable API.
-
 ## Screenshots
 
 ![App Screenshot]()
 
 
-## Tech Stack
-
-**Client:** HTML, CSS, JavaScript
-
-**Server:** Python, Flask, MySQL
-
-
-## License
-
-This project is licensed under the [MIT](https://choosealicense.com/licenses/mit/)
-License. Please refer to the LICENSE file for details.
 ## Usage/Examples
 
-```Python (Flask)
-#!/usr/bin/python3
 """this contains configuration for connecting to MySQL Database."""
 
 from flask import Flask, request, jsonify, make_response, render_template
@@ -111,12 +84,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 
-# Create database tables
 with app.app_context():
     db.create_all()
 
-
-# the endpoint url and method for adding movies
 @app.route('/movies', methods=['GET'])
 def get_all_movies():
     movies = Movie.query.all()
@@ -124,4 +94,32 @@ def get_all_movies():
     return (movie_list)
 
 
+## Contributing
+
+We welcome contributions to this project! If you have improvements, bug fixes, or feature suggestions, feel free to create a pull request on this repository. Please follow these guidelines:
+
+- Fork the repository.
+- Create a new branch for your changes.
+- Write clear and concise commit messages.
+- Add unit tests for your contributions.
+- Submit a pull request for review.
+
+## Tech Stack
+
+**Client:** HTML, CSS, JavaScript
+
+**Server:** Python, Flask, MySQL
+
+## Related
+
+Here are some related projects
+
+- [The Movie Database](https://www.themoviedb.org/)
+- [ Letterboxd ](https://letterboxd.com/)
+
+
+## License
+
+This project is licensed under the [MIT](https://choosealicense.com/licenses/mit/)
+License. Please refer to the LICENSE file for details.
 
