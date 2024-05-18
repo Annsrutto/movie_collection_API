@@ -69,29 +69,8 @@ Welcome to the Movie Collection API! This project empowers developers with a use
 
 ## Usage/Examples
 
-"""this contains configuration for connecting to MySQL Database."""
+<img width="517" alt="Movie-API-Code_Snippet" src="https://github.com/Annsrutto/movie_collection_API/assets/135266679/6b0efda4-73ca-41b1-96b2-d483f7c027be">
 
-from flask import Flask, request, jsonify, make_response, render_template
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.exc import DatabaseError
-from models.movie import Movie, db
-from models.genre import Genre
-
-app = Flask(__name__)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///movie_database.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db.init_app(app)
-
-with app.app_context():
-    db.create_all()
-
-@app.route('/movies', methods=['GET'])
-def get_all_movies():
-    movies = Movie.query.all()
-    movie_list = [movie.serialize() for movie in movies]
-    return (movie_list)
 
 
 ## Contributing
