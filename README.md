@@ -1,15 +1,7 @@
 
 # Movie Collection API
 
-Welcome to the Movie Collection API! This project empowers developers with a user-friendly and powerful way to access a vast amount of movie data. Whether you're building applications, websites, or simply have a passion for movies, this API provides a comprehensive resource to enrich your projects.
-
-
-## Features
-
-- Rich Movie Data: Access details like titles, descriptions, cast, crew, genres, release dates, and more.
-- Efficient Search: Find movies quickly and easily using various filters and keywords.
-- User-Friendly API Design: The RESTful API is well-documented and straightforward to integrate.
-- Regular Updates: We strive to keep the data current and maintain a reliable API.
+The Movie Collection API was developed as a project to showcase RESTful API development skills and to provide a backend solution for managing movie data. It can be integrated with various frontend applications or used as a standalone API for movie enthusiasts or professionals in the entertainment industry. This project empowers developers with a user-friendly and powerful way to access a vast amount of movie data. Whether you're building applications, websites, or simply have a passion for movies, this API provides a comprehensive resource to enrich your projects.
 
 
 ## Installation
