@@ -12,47 +12,38 @@ Welcome to the Movie Collection API! This project empowers developers with a use
 - Regular Updates: We strive to keep the data current and maintain a reliable API.
 
 
-## API Reference
+## Installation
 
-#### List all movies
+To run the Movie Collection API locally, follow these steps:
 
-```http
-  GET /movies
+1. Clone the repository:
+```bash
+  git clone https://github.com/your-username/movie-collection-api.git
 ```
 
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `api_key` | `string` | **Required**. Your API key |
-
-#### Add movie
-
-```http
-  POST /movies/${id}
+2. Navigate to the project directory:
+```bash
+  cd movie-collection-api
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `string` | **Required**. Id of item to add |
-
-#### Update movies
-
-```http
-  PUT /movies/${id}
+3. Create and activate a virtual environment (optional but recommended):
+```bash
+python3 -m venv venv
+source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `string` | **Required**. Id of item to update |
-
-#### Delete movies
-
-```http
-  DELETE /movies/${id}
+4. Set up the database:
+```bash
+flask db upgrade
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `string` | **Required**. Id of item to delete |
+5. Run the application:
+```bash
+flask run
+```
+
+The API should now be running at http://localhost:5000/.
+
 
 ## Authors
 
@@ -62,14 +53,19 @@ Welcome to the Movie Collection API! This project empowers developers with a use
 - [@daviskoech](https://www.github.com/davykoch)
 
 
-## Screenshots
-
-
-<img width="830" alt="App screenshot" src="https://github.com/Annsrutto/movie_collection_API/assets/135266679/393ca09d-67ff-489b-a724-f307aa444d91">
-
 ## Usage/Examples
 
-<img width="517" alt="Movie-API-Code_Snippet" src="https://github.com/Annsrutto/movie_collection_API/assets/135266679/6b0efda4-73ca-41b1-96b2-d483f7c027be">
+The Movie Collection API provides the following endpoints:
+
+- **GET** /movies: Retrieve a list of all movies
+- **POST** /movies: Create a new movie
+- **GET** /movies/<id>: Retrieve a specific movie by ID
+- **PUT** /movies/<id>: Update a movie by ID
+- **DELETE** /movies/<id>: Delete a movie by ID
+- **GET** /search: Search and filter movies by title, genre, or release date
+
+
+<img width="500" alt="Movie-API-Code_Snippet" src="https://github.com/Annsrutto/movie_collection_API/assets/135266679/6b0efda4-73ca-41b1-96b2-d483f7c027be">
 
 
 
@@ -86,10 +82,9 @@ We welcome contributions to this project! If you have improvements, bug fixes, o
 ## Tech Stack
 
 **Client:** HTML, CSS, JavaScript
-
 **Server:** Python, Flask, MySQL
 
-## Related
+## Related Projects
 
 Here are some related projects
 
@@ -102,3 +97,7 @@ Here are some related projects
 This project is licensed under the [MIT](https://choosealicense.com/licenses/mit/)
 License. Please refer to the LICENSE file for details.
 
+
+## Screenshots
+
+<img width="830" alt="App screenshot" src="https://github.com/Annsrutto/movie_collection_API/assets/135266679/393ca09d-67ff-489b-a724-f307aa444d91">
