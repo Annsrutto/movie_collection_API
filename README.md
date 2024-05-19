@@ -39,9 +39,11 @@ The API should now be running at http://localhost:5000/.
 
 ## Authors
 
-- Anns Rutto [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/anns-rutto-22397b217)
+- Anns Rutto
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/anns-rutto-22397b217)
 
-- Davis Koech [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/davis-koech-22145a131)
+- Davis Koech
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/davis-koech-22145a131)
 
 
 ## Usage/Examples
