@@ -23,7 +23,7 @@ To run the Movie Collection API locally, follow these steps:
 
 2. Navigate to the project directory:
 ```bash
-  cd movie-collection-api
+  cd movie_collection_api
 ```
 
 3. Create and activate a virtual environment (optional but recommended):
@@ -47,10 +47,10 @@ The API should now be running at http://localhost:5000/.
 
 ## Authors
 
-- [@annsrutto](https://www.github.com/Annsrutto)
+- [@annsrutto](https://www.linkedin.com/in/anns-rutto-22397b217)
 
 
-- [@daviskoech](https://www.github.com/davykoch)
+- [@daviskoech](https://www.linkedin.com/in/davis-koech-22145a131)
 
 
 ## Usage/Examples
