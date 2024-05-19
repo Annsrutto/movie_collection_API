@@ -44,7 +44,7 @@ The API should now be running at http://localhost:5000/.
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/davis-koech-22145a131)
 
 
-## Usage/Examples
+## Usage
 
 The Movie Collection API provides the following endpoints:
 
@@ -73,6 +73,7 @@ We welcome contributions to this project! If you have improvements, bug fixes, o
 ## Tech Stack
 
 **Client:** HTML, CSS, JavaScript
+
 **Server:** Python, Flask, MySQL
 
 ## Related Projects
@@ -83,7 +84,7 @@ Here are some related projects
 - [ Letterboxd ](https://letterboxd.com/)
 
 
-## License
+## Licensing
 
 This project is licensed under the [MIT](https://choosealicense.com/licenses/mit/)
 License. Please refer to the LICENSE file for details.
