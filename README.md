@@ -10,7 +10,7 @@ To run the Movie Collection API locally, follow these steps:
 
 1. Clone the repository:
 ```bash
-  git clone https://github.com/your-username/movie-collection-api.git
+  git clone https://github.com/your-username/movie_collection_api.git
 ```
 
 2. Navigate to the project directory:
@@ -39,10 +39,9 @@ The API should now be running at http://localhost:5000/.
 
 ## Authors
 
-- [@annsrutto](https://www.linkedin.com/in/anns-rutto-22397b217)
+- Anns Rutto [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/anns-rutto-22397b217)
 
-
-- [@daviskoech](https://www.linkedin.com/in/davis-koech-22145a131)
+- Davis Koech [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/davis-koech-22145a131)
 
 
 ## Usage/Examples
